@@ -1,0 +1,52 @@
+project:
+    name: "droid/apache-vhost"
+    description: "Configure Apache 2 Virtual Hosts"
+
+variables:
+    module_apache_vhost_items: []
+      # An example vhost item:-
+      # -
+      #   name: "test.example.com"
+      #   socket: "*:80"
+      #   servername: "test.example.com"
+      #   docroot: "/var/www/test.example.com"
+      #   env:
+      #       - SOME_ENV AValueThatDoesNotContainSpaces
+      #       - SECRET "This is a secret message."
+
+tasks:
+    -
+      name: "Copy site config to sites-available"
+      command: "fs:copy"
+      arguments:
+          src: "!{{ mod_path }}/assets/apache-vhost.conf.template"
+          dest: "/etc/apache2/sites-available/{{ item.name }}.conf"
+      with_items:
+          module_apache_vhost_items
+    -
+      name: "Create the document root directory"
+      command: "fs:mkdir"
+      arguments:
+          directory: "{{ item.docroot }}"
+      with_items:
+          module_apache_vhost_items
+    -
+      name: "Copy a placeholder index page to the document root directory"
+      command: "fs:copy"
+      arguments:
+          src: "!{{ mod_path }}/assets/index.html.template"
+          dest: "{{ item.docroot }}/index.html"
+      with_items:
+          module_apache_vhost_items
+    -
+      name: "Enable the vhost configuration"
+      command: "apache:ensite"
+      arguments:
+          site-name: "{{ item.name }}"
+      with_items:
+          module_apache_vhost_items
+    -
+      name: "Reload the Apache2 service"
+      command: "service:reload"
+      arguments:
+          name: "apache2"

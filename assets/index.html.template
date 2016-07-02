@@ -1,0 +1,4 @@
+<html>
+<head><title>{{ item.name }}</title></head>
+<body><p>Coming soon: {{ item.name }}!</p></body>
+</html>

@@ -1,0 +1,24 @@
+# ************************************
+# {{{ item.name }}}
+# ************************************
+
+<VirtualHost {{{ item.socket }}}>
+
+  ServerName {{{ item.servername }}}
+
+  DocumentRoot "{{{ item.docroot }}}"
+
+  <Directory "{{{ item.docroot }}}">
+    Options Indexes FollowSymLinks MultiViews
+    AllowOverride All
+    Require all granted
+  </Directory>
+
+  ErrorLog "/var/log/apache2/{{{ item.name }}}_error.log"
+  CustomLog "/var/log/apache2/{{{ item.name }}}_access.log" combined
+
+{{ #each item.env }}
+  SetEnv {{{ . }}}
+{{ /each }}
+
+</VirtualHost>
