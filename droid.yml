@@ -18,6 +18,7 @@ tasks:
     -
       name: "Copy site config to sites-available"
       command: "fs:copy"
+      sudo: true
       arguments:
           src: "!{{ mod_path }}/assets/apache-vhost.conf.template"
           dest: "/etc/apache2/sites-available/{{ item.name }}.conf"
@@ -26,6 +27,7 @@ tasks:
     -
       name: "Create the document root directory"
       command: "fs:mkdir"
+      sudo: true
       arguments:
           directory: "{{ item.docroot }}"
       with_items:
@@ -33,6 +35,7 @@ tasks:
     -
       name: "Copy a placeholder index page to the document root directory"
       command: "fs:copy"
+      sudo: true
       arguments:
           src: "!{{ mod_path }}/assets/index.html.template"
           dest: "{{ item.docroot }}/index.html"
@@ -41,6 +44,7 @@ tasks:
     -
       name: "Enable the vhost configuration"
       command: "apache:ensite"
+      sudo: true
       arguments:
           site-name: "{{ item.name }}"
       with_items:
@@ -48,5 +52,6 @@ tasks:
     -
       name: "Reload the Apache2 service"
       command: "service:reload"
+      sudo: true
       arguments:
           name: "apache2"
