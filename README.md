@@ -1,4 +1,4 @@
-# Droid Module: droid/apache-vhost
+# Droid Module: apache-vhost
 
 Configure Apache 2 Virtual Hosts. For more information on Droid, please see
 [droidphp.com](http://droidphp.com).

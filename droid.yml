@@ -1,6 +1,4 @@
-project:
-    name: "droid/apache-vhost"
-    description: "Configure Apache 2 Virtual Hosts"
+description: "Configure Apache 2 Virtual Hosts"
 
 variables:
     module_apache_vhost_items: []
