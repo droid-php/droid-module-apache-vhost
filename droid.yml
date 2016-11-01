@@ -1,6 +1,7 @@
 description: "Configure Apache 2 Virtual Hosts"
 
 variables:
+    use_legacy_templating: true
     module_apache_vhost_items: []
       # An example vhost item:-
       # -
