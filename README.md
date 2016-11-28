@@ -7,8 +7,8 @@ The steps involved are:-
 
 1. Write a virtual host configuration file for each defined website, to each of
    the hosts.
-2. Create the document root directory of each website on each of the hosts.
-3. Write a placeholder index page to the document root of each website on each
+2. Optionally create the document root directory of each website on each of the hosts.
+3. Optionally write a placeholder index page to the document root of each website on each
    of the hosts.
 4. Enable each virtual host on each of the hosts.
 5. Instruct Apache to reload its configuration on each of the hosts.
@@ -52,7 +52,7 @@ elements:-
 
 - `env`: A list of strings suitable as arguments to the [`SetEnv`][SetEnv]
   directive.
-
+- `placeholder`: set to true if you want to create a placeholder index.html file
 
 [Directory]: <https://httpd.apache.org/docs/2.4/mod/core.html#directory>
 [DocumentRoot]: <https://httpd.apache.org/docs/2.4/mod/core.html#documentroot>

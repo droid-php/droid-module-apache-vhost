@@ -29,6 +29,7 @@ tasks:
       sudo: true
       arguments:
           directory: "{{ item.docroot }}"
+      with_items_filter: "item['placeholder']"
       with_items:
           module_apache_vhost_items
     -
@@ -38,6 +39,7 @@ tasks:
       arguments:
           src: "!{{ mod_path }}/assets/index.html.template"
           dest: "{{ item.docroot }}/index.html"
+      with_items_filter: "item['placeholder']"
       with_items:
           module_apache_vhost_items
     -
